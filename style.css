@@ -142,17 +142,54 @@ ul { list-style: none; }
 .hero-bg {
   position: absolute;
   inset: -20%;
-  background:
-    radial-gradient(circle at 12% 18%, rgba(255,255,255,.09), transparent 38%),
-    radial-gradient(circle at 88% 12%, rgba(255,106,46,.22), transparent 45%),
-    radial-gradient(circle at 78% 82%, rgba(255,106,46,.12), transparent 50%);
-  filter: blur(40px);
-  animation: drift 18s ease-in-out infinite alternate;
+  overflow: hidden;
+  filter: blur(50px);
 }
 
-@keyframes drift {
-  from { transform: translate(0,0) scale(1); }
-  to { transform: translate(2%, -3%) scale(1.05); }
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.blob-1 {
+  top: -8%; left: -6%;
+  width: 55%; height: 55%;
+  background: radial-gradient(circle, rgba(255,106,46,.32), transparent 70%);
+  animation: wave1 22s ease-in-out infinite;
+}
+
+.blob-2 {
+  top: 12%; right: -12%;
+  width: 50%; height: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.10), transparent 70%);
+  animation: wave2 26s ease-in-out infinite;
+}
+
+.blob-3 {
+  bottom: -14%; left: 22%;
+  width: 48%; height: 48%;
+  background: radial-gradient(circle, rgba(255,106,46,.20), transparent 70%);
+  animation: wave3 30s ease-in-out infinite;
+}
+
+@keyframes wave1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(10%, -8%) scale(1.1); }
+  50% { transform: translate(-6%, 6%) scale(0.94); }
+  75% { transform: translate(6%, 10%) scale(1.05); }
+}
+
+@keyframes wave2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  30% { transform: translate(-12%, 8%) scale(1.08); }
+  60% { transform: translate(4%, -10%) scale(0.95); }
+}
+
+@keyframes wave3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  35% { transform: translate(8%, -6%) scale(1.06); }
+  70% { transform: translate(-10%, -4%) scale(0.96); }
 }
 
 .hero-inner { position: relative; z-index: 1; width: 100%; }
@@ -612,7 +649,7 @@ section { padding: 8rem 0; position: relative; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero-bg { animation: none; }
+  .blob { animation: none; }
   .scroll-cue span { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
