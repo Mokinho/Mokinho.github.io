@@ -416,6 +416,17 @@ section { padding: 8rem 0; position: relative; }
   letter-spacing: .02em;
 }
 
+.mockup-photo {
+  aspect-ratio: 4 / 3;
+  background: #000;
+}
+.mockup-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .mockup-screen {
   position: relative;
   aspect-ratio: 16 / 10;
