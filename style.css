@@ -694,24 +694,31 @@ section { padding: 8rem 0; position: relative; }
 @media (max-width: 640px) {
   .nav-toggle { display: flex; }
   .nav-links {
-    position: fixed;
-    inset: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     z-index: 100;
     background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 16px 32px rgba(0,0,0,.5);
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2.2rem;
-    padding: 2rem;
-    transform: translateX(100%);
-    transition: transform .35s var(--ease);
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.5rem 2rem 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity .25s var(--ease), transform .25s var(--ease), visibility .25s;
   }
-  .nav-links.open { transform: translateX(0); }
+  .nav-links.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
   .nav-links a {
-    font-family: var(--font-display);
-    font-size: 1.7rem;
-    font-weight: 600;
-    color: var(--text);
+    font-size: .95rem;
+    color: var(--text-dim);
   }
 
   section { padding: 5rem 0; }
