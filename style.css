@@ -1,13 +1,17 @@
 /* ---------- Design tokens ---------- */
 :root {
-  --bg: #0a0a0a;
-  --bg-alt: #130f0c;
-  --surface: #181310;
-  --border: #2e2620;
+  --bg: #000000;
+  --bg-alt: #070402;
+  --surface: #120b07;
+  --border: #2e2016;
   --text: #f7f3ee;
   --text-dim: #9a8c7f;
-  --accent: #ff6a2e;
-  --accent-dim: #b3491c;
+  --accent: #e85002;
+  --accent-dim: #c10901;
+  --grad-1: #000000;
+  --grad-2: #c10901;
+  --grad-3: #f16001;
+  --grad-4: #d9c3ab;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --max-width: 1120px;
@@ -41,7 +45,7 @@ ul { list-style: none; }
   left: -9999px;
   top: 0;
   background: var(--accent);
-  color: #0a0a0a;
+  color: #000000;
   padding: .75rem 1rem;
   z-index: 999;
 }
@@ -63,7 +67,7 @@ ul { list-style: none; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(10,10,10,.7);
+  background: rgba(0,0,0,.7);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
@@ -141,55 +145,52 @@ ul { list-style: none; }
 
 .hero-bg {
   position: absolute;
-  inset: -20%;
+  z-index: 0;
+  inset: -15%;
   overflow: hidden;
-  filter: blur(50px);
+  background: var(--bg);
 }
 
-.blob {
+.beam {
   position: absolute;
-  border-radius: 50%;
-  will-change: transform;
+  top: -20%;
+  height: 140%;
+  width: 16%;
+  transform: rotate(-18deg);
+  will-change: transform, opacity;
 }
 
-.blob-1 {
-  top: -8%; left: -6%;
-  width: 55%; height: 55%;
-  background: radial-gradient(circle, rgba(255,106,46,.32), transparent 70%);
-  animation: wave1 22s ease-in-out infinite;
+.beam-dim {
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,.035), transparent);
+  filter: blur(20px);
+}
+.beam-dim.b1 { left: 4%; }
+.beam-dim.b2 { left: 62%; }
+.beam-dim.b3 { left: 84%; }
+
+.beam-glow {
+  left: 24%;
+  width: 30%;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    var(--grad-4) 38%,
+    var(--grad-3) 55%,
+    var(--grad-2) 72%,
+    transparent 100%);
+  filter: blur(45px);
+  opacity: .85;
+  animation: beamdrift 24s ease-in-out infinite;
 }
 
-.blob-2 {
-  top: 12%; right: -12%;
-  width: 50%; height: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,.10), transparent 70%);
-  animation: wave2 26s ease-in-out infinite;
+@keyframes beamdrift {
+  0%, 100% { transform: rotate(-18deg) translateX(0) scaleY(1); opacity: .85; }
+  50% { transform: rotate(-16deg) translateX(3%) scaleY(1.05); opacity: 1; }
 }
 
-.blob-3 {
-  bottom: -14%; left: 22%;
-  width: 48%; height: 48%;
-  background: radial-gradient(circle, rgba(255,106,46,.20), transparent 70%);
-  animation: wave3 30s ease-in-out infinite;
-}
-
-@keyframes wave1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(10%, -8%) scale(1.1); }
-  50% { transform: translate(-6%, 6%) scale(0.94); }
-  75% { transform: translate(6%, 10%) scale(1.05); }
-}
-
-@keyframes wave2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  30% { transform: translate(-12%, 8%) scale(1.08); }
-  60% { transform: translate(4%, -10%) scale(0.95); }
-}
-
-@keyframes wave3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  35% { transform: translate(8%, -6%) scale(1.06); }
-  70% { transform: translate(-10%, -4%) scale(0.96); }
+.hero-bg .grain {
+  position: absolute;
+  inset: 0;
+  opacity: .12;
 }
 
 .hero-inner { position: relative; z-index: 1; width: 100%; }
@@ -237,9 +238,9 @@ ul { list-style: none; }
 
 .btn-primary {
   background: var(--accent);
-  color: #0a0a0a;
+  color: #000000;
 }
-.btn-primary:hover { background: #ff8c54; }
+.btn-primary:hover { background: var(--grad-3); }
 
 .btn-ghost {
   border: 1px solid var(--border);
@@ -584,9 +585,31 @@ section { padding: 8rem 0; position: relative; }
 
 /* ---------- Contact ---------- */
 .contact {
+  position: relative;
+  overflow: hidden;
   background: var(--bg-alt);
   border-top: 1px solid var(--border);
 }
+
+.contact::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 58%;
+  width: 32%;
+  height: 200%;
+  transform: rotate(-18deg);
+  background: linear-gradient(180deg,
+    transparent 0%,
+    var(--grad-2) 42%,
+    var(--grad-3) 60%,
+    transparent 100%);
+  filter: blur(70px);
+  opacity: .16;
+  pointer-events: none;
+}
+
+.contact .container { position: relative; z-index: 1; }
 
 .contact-lead {
   font-family: var(--font-display);
@@ -649,7 +672,7 @@ section { padding: 8rem 0; position: relative; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .blob { animation: none; }
+  .beam-glow { animation: none; }
   .scroll-cue span { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
