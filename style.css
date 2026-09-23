@@ -602,3 +602,27 @@ footer li a:hover { color: var(--sub); }
 @keyframes toTopFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 @media (prefers-reduced-motion: reduce) { .to-top-icon { animation: none; } }
 .footer-bottom { align-items: center; }
+
+/* ---------- Wide featured case study ---------- */
+.feature-wide {
+  grid-column: 1 / -1; display: grid; grid-template-columns: 1.35fr 1fr; overflow: hidden;
+  background: var(--surface-solid); border: 1px solid var(--line); border-radius: var(--radius-sm);
+  transition: border-color .3s var(--ease), box-shadow .3s var(--ease);
+}
+.feature-wide:hover { border-color: rgba(232,80,2,.5); box-shadow: 0 24px 50px -24px rgba(232,80,2,.45); }
+.feature-wide-media { display: block; overflow: hidden; background: #fff; min-height: 100%; }
+.feature-wide-media img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .6s var(--ease); }
+.feature-wide:hover .feature-wide-media img { transform: scale(1.03); }
+.feature-wide-body { padding: 36px; display: flex; flex-direction: column; }
+.feature-wide-body h3 { font-size: 28px; line-height: 1.15; letter-spacing: -.02em; margin: 8px 0 12px; }
+.feature-wide-body > p:not(.project-tag) { font-size: 15px; }
+.wide-points { margin: 20px 0 22px; display: grid; gap: 10px; }
+.wide-points li { position: relative; padding-left: 20px; font-size: 14.5px; line-height: 1.5; }
+.wide-points li::before { content: ''; position: absolute; left: 0; top: .55em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.wide-points strong { color: var(--heading); }
+.feature-wide-body .feature-link { margin-top: auto; }
+@media (max-width: 900px) {
+  .feature-wide { grid-template-columns: 1fr; }
+  .feature-wide-media { aspect-ratio: 4 / 3; }
+  .feature-wide-body { padding: 24px 22px 26px; }
+}
