@@ -5,232 +5,212 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Faiq Zharfan — Full-Stack WordPress Developer</title>
 <meta name="description" content="Portfolio of Faiq Zharfan — Full-Stack WordPress Developer, 4+ years experience. Front-end development, WordPress customization, hosting, migration & SEO.">
-<link rel="icon" href="data:,">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/avatar-circle.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="grain"></div>
-
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-header" id="header">
-  <nav class="nav">
-    <a href="#top" class="logo">FZ<span class="dot">.</span></a>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+  <div class="shell header-inner">
+    <a href="#top" class="logo" aria-label="Faiq Zharfan — home">
+      <img src="assets/logo-mark-192.png" alt="" width="44" height="44">
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#top" data-nav class="active">Home</a></li>
+        <li><a href="#about" data-nav>About</a></li>
+        <li><a href="#work" data-nav>Work</a></li>
+        <li><a href="#skills" data-nav>Skills</a></li>
+        <li><a href="#faq" data-nav>FAQs</a></li>
+        <li><a href="#contact" data-nav>Contact</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="btn btn-accent header-cta">Let's talk</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#about" data-nav>About</a></li>
-      <li><a href="#skills" data-nav>Skills</a></li>
-      <li><a href="#work" data-nav>Work</a></li>
-      <li><a href="#contact" data-nav>Contact</a></li>
-    </ul>
-  </nav>
+  </div>
 </header>
 
-<main id="main">
+<main id="main" class="shell">
 
+  <!-- HERO -->
   <section class="hero" id="top">
-    <div class="hero-bg" aria-hidden="true">
-      <span class="beam beam-dim b1"></span>
-      <span class="beam beam-dim b2"></span>
-      <span class="beam beam-dim b3"></span>
-      <span class="beam beam-glow"></span>
-      <span class="grain"></span>
+    <div class="hero-media" aria-hidden="true">
+      <span class="glow g1"></span>
+      <span class="glow g2"></span>
+      <canvas class="particles" id="particles"></canvas>
     </div>
-    <div class="hero-inner container">
-      <p class="eyebrow reveal">Full-Stack WordPress Developer — 4+ Years Experience</p>
-      <h1 class="hero-title reveal">
-        I build websites <br> that are fast, <span class="accent">secure</span><br>
-        &amp; built to grow.
-      </h1>
+    <div class="hero-body">
+      <p class="pill pill-accent reveal">Full-Stack WordPress Developer</p>
+      <h1 class="reveal">I build websites that are fast, <span class="hl">secure</span> &amp; built to grow.</h1>
       <p class="hero-sub reveal">
-        Based in Malaysia, currently building at Sterrific — turning
-        ideas into responsive, production-ready digital experiences. From
-        custom WordPress builds to full front-end development, hosting,
-        migration &amp; SEO.
+        Based in Malaysia, currently building at Sterrific — turning ideas into
+        responsive, production-ready digital experiences. From custom WordPress
+        builds to full front-end development, hosting, migration &amp; SEO.
       </p>
-      <div class="hero-cta reveal">
-        <a href="#work" class="btn btn-primary">View Work</a>
-        <a href="#contact" class="btn btn-ghost">Get In Touch</a>
-        <a href="assets/Muhammad_Faiq_Zharfan_Johari_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Resume ↗</a>
+      <div class="btn-row reveal">
+        <a href="#work" class="btn btn-accent">View work</a>
+        <a href="#contact" class="btn btn-glass">Get in touch</a>
+        <a href="assets/Muhammad_Faiq_Zharfan_Johari_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Resume ↗</a>
       </div>
     </div>
-    <a href="#about" class="scroll-cue" aria-label="Scroll down">
-      <span></span>
-    </a>
+    <div class="hero-avatar reveal" aria-hidden="true">
+      <img src="assets/avatar-circle.png" alt="" width="360" height="360">
+    </div>
   </section>
 
-  <section class="about" id="about">
-    <div class="container about-grid">
-      <div class="section-head reveal">
-        <span class="section-num">01</span>
-        <h2>About</h2>
-      </div>
-      <div class="about-content reveal">
-        <p class="about-lead">
-          I discovered my passion for coding during university when I wrote my
-          first “Hello, World!” program in Python — and that moment changed my
-          career path forever. What began as curiosity quickly grew into a
-          lifelong enthusiasm for web development, where creativity meets
-          problem-solving.
-        </p>
-        <p>
-          With a naturally extroverted personality, I enjoy collaborating with
-          people and transforming their ideas into digital realities. My focus
-          lies in front-end development and WordPress customization, where I
-          blend technical expertise with design principles to build websites
-          that are responsive, secure, and visually engaging across both web
-          and mobile platforms.
-        </p>
-        <p>
-          I take pride in delivering complete end-to-end solutions — from
-          Custom Post Types (CPT) and ACF integrations to pro plugin
-          customization, hosting setup, site migration, SSL, DNS, and email
-          management. Beyond development, I troubleshoot issues across all
-          hosting providers, whether cPanel-based or managed cloud hosting.
-        </p>
-        <p>
-          For me, web development isn't just about writing code — it's about
-          creating meaningful digital experiences that help businesses grow,
-          backed by reliable and scalable technical foundations.
-        </p>
+  <!-- FEATURED WORK -->
+  <section class="panel" id="work">
+    <p class="pill reveal">Selected work</p>
+    <h2 class="reveal">Websites I've built, rebuilt &amp; migrated</h2>
+    <p class="lead reveal">From company revamps to full WordPress rebuilds — design, development, hosting and migration handled end to end.</p>
+    <div class="feature-grid">
+      <a class="feature-card reveal" href="https://www.sterrific.com.my/" target="_blank" rel="noopener noreferrer">
+        <img src="assets/projects/sterrific.png" alt="Sterrific website shown on a laptop mockup" loading="lazy">
+        <div class="feature-body">
+          <span class="feature-tag">Website Revamp</span>
+          <h3>Sterrific</h3>
+          <p>Full revamp of the Sterrific company website — rebuilt for a cleaner, more responsive experience with improved performance.</p>
+          <span class="feature-link">Visit site →</span>
+        </div>
+      </a>
+      <a class="feature-card reveal" href="https://www.3dresources.com.my/" target="_blank" rel="noopener noreferrer">
+        <img src="assets/projects/3dresources.png" alt="3D Resources website shown on a phone mockup" loading="lazy">
+        <div class="feature-body">
+          <span class="feature-tag">Rebuild &amp; Migration</span>
+          <h3>3D Resources</h3>
+          <p>Rebuilt from static HTML into a full WordPress platform, with complete migration — hosting, DNS and content included.</p>
+          <span class="feature-link">Visit site →</span>
+        </div>
+      </a>
+    </div>
+  </section>
 
-        <h3 class="timeline-heading">Experience</h3>
-        <ul class="timeline">
-          <li class="timeline-item">
-            <span class="timeline-date">Feb 2025 — Present</span>
-            <div class="timeline-body">
-              <h4>Web Developer</h4>
-              <p>Sterrific Sdn Bhd</p>
-            </div>
-          </li>
-          <li class="timeline-item">
-            <span class="timeline-date">2024</span>
-            <div class="timeline-body">
-              <h4>Web Developer</h4>
-              <p>MacGad Technology Sdn Bhd</p>
-            </div>
-          </li>
-          <li class="timeline-item">
-            <span class="timeline-date">2020 — 2024</span>
-            <div class="timeline-body">
-              <h4>Web Developer / Assistant Chief IT / Graphic Designer</h4>
-              <p>Yayasan Pasir Gudang</p>
-            </div>
-          </li>
-          <li class="timeline-item">
-            <span class="timeline-date">2020</span>
-            <div class="timeline-body">
-              <h4>Intern, Junior Programmer</h4>
-              <p>Nestlé Malaysia Sdn Bhd</p>
-            </div>
-          </li>
+  <!-- ABOUT -->
+  <section class="about-row" id="about">
+    <div class="about-media reveal">
+      <img src="assets/avatar-portrait.jpg" alt="Illustrated avatar of Faiq Zharfan" width="640" height="717" loading="lazy">
+    </div>
+    <div class="panel about-panel reveal">
+      <p class="pill">About me</p>
+      <h2>From “Hello, World!” to end-to-end web builds</h2>
+      <p>
+        I discovered my passion for coding during university when I wrote my first
+        “Hello, World!” program in Python — and that moment changed my career path
+        forever. What began as curiosity quickly grew into a lifelong enthusiasm for
+        web development, where creativity meets problem-solving.
+      </p>
+      <p>
+        With a naturally extroverted personality, I enjoy collaborating with people and
+        transforming their ideas into digital realities. My focus lies in front-end
+        development and WordPress customization, where I blend technical expertise with
+        design principles to build websites that are responsive, secure, and visually
+        engaging across both web and mobile platforms.
+      </p>
+      <p>
+        I take pride in delivering complete end-to-end solutions — from Custom Post Types
+        (CPT) and ACF integrations to pro plugin customization, hosting setup, site
+        migration, SSL, DNS, and email management. Beyond development, I troubleshoot
+        issues across all hosting providers, whether cPanel-based or managed cloud hosting.
+      </p>
+      <p>
+        For me, web development isn't just about writing code — it's about creating
+        meaningful digital experiences that help businesses grow, backed by reliable and
+        scalable technical foundations.
+      </p>
+      <a href="assets/Muhammad_Faiq_Zharfan_Johari_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-ink">View full CV ↗</a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" aria-label="At a glance">
+    <div class="stat reveal"><strong>4+</strong><span>Years building and maintaining websites</span></div>
+    <div class="stat reveal"><strong>20+</strong><span>Websites designed, built, revamped or migrated</span></div>
+    <div class="stat reveal"><strong>End-to-end</strong><span>Design, development, hosting, migration &amp; SEO</span></div>
+    <div class="stat reveal"><strong>MY &amp; SG</strong><span>Clients across Malaysia and Singapore</span></div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="panel" id="skills">
+    <p class="pill reveal">Skills &amp; expertise</p>
+    <h2 class="reveal">What I bring to your project</h2>
+    <div class="service-grid">
+      <div class="service-card reveal">
+        <span class="num">01</span>
+        <h3>Front-End &amp; Design</h3>
+        <ul>
+          <li>Responsive design &amp; website optimization</li>
+          <li>HTML, CSS, JavaScript</li>
+          <li>Expanding into React, Angular &amp; jQuery</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <span class="num">02</span>
+        <h3>WordPress &amp; CMS</h3>
+        <ul>
+          <li>Custom Post Types (CPT) &amp; ACF integrations</li>
+          <li>Elementor, WPBakery, Visual Composer</li>
+          <li>WooCommerce, theme &amp; custom builds</li>
+          <li>Drupal (Intermediate)</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <span class="num">03</span>
+        <h3>Infrastructure &amp; Hosting</h3>
+        <ul>
+          <li>Hosting, DNS, SSL &amp; email setup</li>
+          <li>Site migration, FileZilla, DirectAdmin</li>
+          <li>Troubleshooting — cPanel, cloud &amp; managed hosting</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <span class="num">04</span>
+        <h3>Marketing &amp; Analytics</h3>
+        <ul>
+          <li>SEO optimization</li>
+          <li>Google Ads &amp; Google Tag Manager</li>
+          <li>Power BI &amp; PowerApps</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <span class="num">05</span>
+        <h3>Design Tools</h3>
+        <ul>
+          <li>Photoshop</li>
+          <li>Illustrator</li>
+          <li>Webflow</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <span class="num">06</span>
+        <h3>Programming &amp; AI Tools</h3>
+        <ul>
+          <li>Python, PHP, Java, C#, C++</li>
+          <li>Claude AI, ChatGPT Pro, Gemini &amp; Blackbox — my daily AI pair-programmers</li>
+          <li>VS Code, supercharged with MCP connectors linking my tools together</li>
+          <li>Always learning something new</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <section class="skills" id="skills">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="section-num">02</span>
-        <h2>Skills &amp; Expertise</h2>
+  <!-- MORE WORK -->
+  <section class="panel" id="more-work">
+    <div class="panel-head">
+      <div>
+        <p class="pill reveal">More projects</p>
+        <h2 class="reveal">Client websites &amp; landing pages</h2>
       </div>
-      <div class="skills-grid">
-        <div class="skill-card reveal">
-          <h3>Front-End &amp; Design</h3>
-          <ul>
-            <li>Responsive design &amp; website optimization</li>
-            <li>HTML, CSS, JavaScript</li>
-            <li>Expanding into React, Angular &amp; jQuery</li>
-          </ul>
-        </div>
-        <div class="skill-card reveal">
-          <h3>WordPress &amp; CMS</h3>
-          <ul>
-            <li>Custom Post Types (CPT) &amp; ACF integrations</li>
-            <li>Elementor, WPBakery, Visual Composer</li>
-            <li>WooCommerce, theme &amp; custom builds</li>
-            <li>Drupal (Intermediate)</li>
-          </ul>
-        </div>
-        <div class="skill-card reveal">
-          <h3>Infrastructure &amp; Hosting</h3>
-          <ul>
-            <li>Hosting, DNS, SSL &amp; email setup</li>
-            <li>Site migration, FileZilla, DirectAdmin</li>
-            <li>Troubleshooting — cPanel, cloud &amp; managed hosting</li>
-          </ul>
-        </div>
-        <div class="skill-card reveal">
-          <h3>Marketing &amp; Analytics</h3>
-          <ul>
-            <li>SEO optimization</li>
-            <li>Google Ads &amp; Google Tag Manager</li>
-            <li>Power BI &amp; PowerApps</li>
-          </ul>
-        </div>
-        <div class="skill-card reveal">
-          <h3>Design Tools</h3>
-          <ul>
-            <li>Photoshop</li>
-            <li>Illustrator</li>
-            <li>Webflow</li>
-          </ul>
-        </div>
-        <div class="skill-card reveal">
-          <h3>Programming &amp; AI Tools</h3>
-          <ul>
-            <li>Python, PHP, Java, C#, C++</li>
-            <li>Claude AI, ChatGPT Pro, Gemini &amp; Blackbox — my daily AI pair-programmers</li>
-            <li>VS Code, supercharged with MCP connectors linking my tools together</li>
-            <li>Always learning something new</li>
-          </ul>
-        </div>
-      </div>
+      <a href="#contact" class="btn btn-soft reveal">Start a project</a>
     </div>
-  </section>
-
-  <section class="work" id="work">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="section-num">03</span>
-        <h2>Selected Work</h2>
-      </div>
-
-      <div class="project-grid">
-
-        <!-- 01 -->
-        <article class="project-card reveal">
-          <div class="mockup mockup-photo">
-            <img src="assets/projects/sterrific.png" alt="Sterrific website shown on a laptop mockup" loading="lazy">
-          </div>
-          <div class="project-body">
-            <p class="project-tag">Website Revamp</p>
-            <h3>Sterrific</h3>
-            <p class="project-desc">Full revamp of the Sterrific company website — rebuilt for a cleaner, more responsive experience with improved performance.</p>
-            <a href="https://www.sterrific.com.my/" target="_blank" rel="noopener noreferrer" class="project-link">Visit site <span class="arrow">→</span></a>
-          </div>
-        </article>
-
-        <!-- 02 -->
-        <article class="project-card reveal">
-          <div class="mockup mockup-photo">
-            <img src="assets/projects/3dresources.png" alt="3D Resources website shown on a phone mockup" loading="lazy">
-          </div>
-          <div class="project-body">
-            <p class="project-tag">Rebuild &amp; Migration</p>
-            <h3>3D Resources</h3>
-            <p class="project-desc">Rebuilt from static HTML into a full WordPress platform, with complete migration — hosting, DNS and content included.</p>
-            <a href="https://www.3dresources.com.my/" target="_blank" rel="noopener noreferrer" class="project-link">Visit site <span class="arrow">→</span></a>
-          </div>
-        </article>
-
+    <div class="project-grid">
         <!-- 03 -->
         <article class="project-card reveal">
           <div class="mockup" style="--mock-a:#0a0a0a; --mock-b:#1a1a1a;">
@@ -574,50 +554,116 @@
             <a href="https://www.southamptonmalaysia.edu.my/" target="_blank" rel="noopener noreferrer" class="project-link">Visit site <span class="arrow">→</span></a>
           </div>
         </article>
-
-      </div>
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
+  <section class="panel" id="experience">
+    <p class="pill reveal">Experience</p>
+    <h2 class="reveal">Where I've worked</h2>
+    <ol class="timeline">
+      <li class="reveal"><span class="t-date">Feb 2025 — Present</span><div><h3>Web Developer</h3><p>Sterrific Sdn Bhd</p></div></li>
+      <li class="reveal"><span class="t-date">2024</span><div><h3>Web Developer</h3><p>MacGad Technology Sdn Bhd</p></div></li>
+      <li class="reveal"><span class="t-date">2020 — 2024</span><div><h3>Web Developer / Assistant Chief IT / Graphic Designer</h3><p>Yayasan Pasir Gudang</p></div></li>
+      <li class="reveal"><span class="t-date">2020</span><div><h3>Intern, Junior Programmer</h3><p>Nestlé Malaysia Sdn Bhd</p></div></li>
+    </ol>
+  </section>
+
+  <!-- FAQ -->
+  <section class="panel" id="faq">
+    <p class="pill reveal">FAQs</p>
+    <h2 class="reveal">Working with me, answered</h2>
+    <div class="faq-list">
+      <details class="reveal" open>
+        <summary>What do you specialise in?</summary>
+        <p>Front-end development and WordPress customization — building websites that are responsive, secure and visually engaging across both web and mobile.</p>
+      </details>
+      <details class="reveal">
+        <summary>Can you handle hosting, migration and DNS?</summary>
+        <p>Yes. I set up hosting, migrate sites, and manage SSL, DNS and email — and I troubleshoot issues across all hosting providers, whether cPanel-based or managed cloud hosting.</p>
+      </details>
+      <details class="reveal">
+        <summary>Do you build custom WordPress functionality?</summary>
+        <p>Yes — Custom Post Types (CPT) and ACF integrations, pro plugin customization, WooCommerce, and theme or fully custom builds, alongside page builders like Elementor and WPBakery.</p>
+      </details>
+      <details class="reveal">
+        <summary>Can you help with SEO and analytics?</summary>
+        <p>Yes. I work on SEO optimization, Google Ads and Google Tag Manager, and reporting with Power BI.</p>
+      </details>
+      <details class="reveal">
+        <summary>Where are you based?</summary>
+        <p>I'm based in Malaysia and currently work as a Web Developer at Sterrific. I've delivered websites for clients in Malaysia and Singapore.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
   <section class="contact" id="contact">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="section-num">04</span>
-        <h2>Contact</h2>
-      </div>
-      <div class="contact-content reveal">
-        <p class="contact-lead">
-          Have a project in mind, or need help with a website — from scratch,
-          or a rebuild? Let's talk.
-        </p>
-        <div class="contact-links">
-          <a href="mailto:muhammadfaiqzharfan.johari@gmail.com" class="contact-link">
-            <span class="contact-label">Email</span>
-            <span class="contact-value">muhammadfaiqzharfan.johari@gmail.com</span>
-          </a>
-          <a href="https://wa.link/dkr48l" target="_blank" rel="noopener noreferrer" class="contact-link">
-            <span class="contact-label">WhatsApp</span>
-            <span class="contact-value">Message me directly</span>
-          </a>
-          <a href="https://www.linkedin.com/in/muhammadfaiqzharfanjohari1997/" target="_blank" rel="noopener noreferrer" class="contact-link">
-            <span class="contact-label">LinkedIn</span>
-            <span class="contact-value">muhammadfaiqzharfanjohari1997</span>
-          </a>
-          <a href="assets/Muhammad_Faiq_Zharfan_Johari_Resume.pdf" target="_blank" rel="noopener noreferrer" class="contact-link">
-            <span class="contact-label">Resume</span>
-            <span class="contact-value">View full CV</span>
-          </a>
-        </div>
+    <div class="hero-media" aria-hidden="true"><span class="glow g1"></span><span class="glow g2"></span></div>
+    <div class="contact-body">
+      <p class="pill pill-accent reveal">Contact</p>
+      <h2 class="reveal">Have a project in mind? Let's talk.</h2>
+      <p class="reveal">Need help with a website — from scratch, or a rebuild? Reach out through any of the channels below.</p>
+      <div class="contact-links">
+        <a href="mailto:muhammadfaiqzharfan.johari@gmail.com" class="contact-link reveal">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">muhammadfaiqzharfan.johari@gmail.com</span>
+        </a>
+        <a href="https://wa.link/dkr48l" target="_blank" rel="noopener noreferrer" class="contact-link reveal">
+          <span class="contact-label">WhatsApp</span>
+          <span class="contact-value">Message me directly →</span>
+        </a>
+        <a href="https://www.linkedin.com/in/muhammadfaiqzharfanjohari1997/" target="_blank" rel="noopener noreferrer" class="contact-link reveal">
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">muhammadfaiqzharfanjohari1997</span>
+        </a>
+        <a href="assets/Muhammad_Faiq_Zharfan_Johari_Resume.pdf" target="_blank" rel="noopener noreferrer" class="contact-link reveal">
+          <span class="contact-label">Resume</span>
+          <span class="contact-value">View full CV ↗</span>
+        </a>
       </div>
     </div>
   </section>
 
 </main>
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <span>© <span id="year"></span> Faiq Zharfan. All rights reserved.</span>
-    <a href="#top" class="back-to-top">Back to top ↑</a>
+<footer class="shell">
+  <div class="footer-panel">
+    <div class="footer-cols">
+      <div class="footer-brand">
+        <img src="assets/logo-mark-192.png" alt="" width="56" height="56">
+        <p>Full-Stack WordPress Developer building fast, secure websites — from design and development to hosting, migration &amp; SEO.</p>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="#top">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#faq">FAQs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:muhammadfaiqzharfan.johari@gmail.com">Email</a></li>
+          <li><a href="https://wa.link/dkr48l" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+          <li><a href="https://www.linkedin.com/in/muhammadfaiqzharfanjohari1997/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="assets/Muhammad_Faiq_Zharfan_Johari_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Based in</h4>
+        <p>Malaysia</p>
+        <h4>Currently</h4>
+        <p>Web Developer at Sterrific</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Faiq Zharfan. All rights reserved.</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
   </div>
 </footer>
 
