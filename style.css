@@ -534,3 +534,9 @@ footer li a:hover { color: var(--accent-deep); }
   .timeline li { grid-template-columns: 1fr; gap: 4px; }
   .footer-panel { padding: 32px 22px 22px; }
 }
+
+/* Experience details */
+.timeline li { align-items: start; }
+.timeline .t-date { padding-top: 3px; }
+.timeline .t-org { font-weight: 600; color: var(--ink); margin-top: 2px; }
+.timeline .t-org + p { margin-top: 6px; max-width: 760px; }
