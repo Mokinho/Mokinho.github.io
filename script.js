@@ -1,3 +1,43 @@
+// Page loader: counts up while the page loads, then sweeps away (on every load / refresh)
+(() => {
+  const loader = document.getElementById('preloader');
+  const root = document.documentElement;
+  if (!loader || !root.classList.contains('preloading')) return;
+  const fill = document.getElementById('preloaderFill');
+  const count = document.getElementById('preloaderCount');
+  const MIN_MS = 900;     // long enough to be seen, short enough not to annoy
+  const MAX_MS = 4000;    // give up waiting on slow assets
+  const start = performance.now();
+  let shown = 0, loaded = false, finished = false;
+  const render = v => {
+    fill.style.transform = `scaleX(${v / 100})`;
+    count.textContent = String(Math.round(v));
+  };
+  const finish = () => {
+    if (finished) return;
+    finished = true;
+    render(100);
+    loader.classList.add('is-done');
+    // release the hero entrance as the curtain clears
+    setTimeout(() => root.classList.remove('preloading'), 700);
+    setTimeout(() => loader.remove(), 1500);
+  };
+  const tick = now => {
+    if (finished) return;
+    const t = now - start;
+    // ease toward 90% while loading; run to 100% once loaded and the minimum time has passed
+    const target = loaded && t >= MIN_MS ? 100 : Math.min(90, 90 * (1 - Math.exp(-t / 700)));
+    shown += (target - shown) * 0.12;
+    render(shown);
+    if (target === 100 && shown > 99.5) return finish();
+    if (t > MAX_MS) return finish();
+    requestAnimationFrame(tick);
+  };
+  if (document.readyState === 'complete') loaded = true;
+  else window.addEventListener('load', () => { loaded = true; }, { once: true });
+  requestAnimationFrame(tick);
+})();
+
 // Mobile nav toggle
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');

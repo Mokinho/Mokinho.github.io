@@ -11,8 +11,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('preloading');</script>
 </head>
 <body>
+
+<!-- Page loader (shown on every load / refresh; hidden without JS) -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader-inner">
+    <span class="preloader-logo"><img src="assets/logo-mark-192.png" alt="" width="56" height="56"></span>
+    <p class="preloader-name">Faiq Zharfan</p>
+    <div class="preloader-bar"><span id="preloaderFill"></span></div>
+    <p class="preloader-count"><span id="preloaderCount">0</span>%</p>
+  </div>
+  <span class="preloader-curtain"></span>
+</div>
 
 <a class="skip-link" href="#main">Skip to content</a>
 
