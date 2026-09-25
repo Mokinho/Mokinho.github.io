@@ -91,94 +91,47 @@ document.querySelectorAll('main section[id]').forEach(s => navObserver.observe(s
   window.addEventListener('resize', resize);
 })();
 
-// PillNav hover effect on the desktop menu (hamburger dropdown untouched)
+// Desktop menu — RubberSegment thumb (stretch + squash), synced with scroll-spy
 (() => {
-  const list = document.getElementById('navLinks');
-  const gsap = window.gsap;
-  if (!list || !gsap) return;
-  const ease = 'power3.out';
-  const desktop = window.matchMedia('(min-width: 901px)');
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const links = [...list.querySelectorAll('a')];
-  const tls = [];
-  const tweens = [];
-
-  links.forEach(a => {
-    const text = a.textContent.trim();
-    a.setAttribute('aria-label', text);
-    a.innerHTML = `<span class="hover-circle" aria-hidden="true"></span><span class="label-stack"><span class="pill-label">${text}</span><span class="pill-label-hover" aria-hidden="true">${text}</span></span>`;
+  if (!window.RubberSegment) return;
+  const links = [...navLinks.querySelectorAll('a')];
+  let locked = false;
+  let unlockTimer = 0;
+  const activeIndex = () => links.findIndex(a => a.classList.contains('active'));
+  const unlock = () => { locked = false; seg.setActive(activeIndex()); };
+  const lockUntilScrollEnds = () => {
+    locked = true;
+    const bump = () => { clearTimeout(unlockTimer); unlockTimer = setTimeout(() => { window.removeEventListener('scroll', bump); unlock(); }, 180); };
+    window.addEventListener('scroll', bump, { passive: true });
+    bump();
+    clearTimeout(unlockTimer);
+    unlockTimer = setTimeout(() => { window.removeEventListener('scroll', bump); unlock(); }, 900);
+  };
+  const seg = window.RubberSegment(navLinks, {
+    links,
+    inset: 5,
+    radius: 22,
+    stretch: 100,
+    squash: 3,
+    speed: 1,
+    glide: 75,
+    draggable: true,
+    onCommit: (i, how) => {
+      lockUntilScrollEnds();
+      if (how === 'drag') {
+        const href = links[i].getAttribute('href');
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+          history.replaceState(null, '', href);
+        }
+      }
+    }
   });
-  list.classList.add('pill-ready');
-
-  const reset = () => {
-    tls.forEach(tl => tl && tl.kill());
-    tweens.forEach(t => t && t.kill());
-    tls.length = 0;
-    list.querySelectorAll('.hover-circle, .pill-label, .pill-label-hover').forEach(el => gsap.set(el, { clearProps: 'all' }));
-  };
-
-  const layout = () => {
-    reset();
-    if (!desktop.matches) return;
-    links.forEach((a, i) => {
-      const circle = a.querySelector('.hover-circle');
-      const label = a.querySelector('.pill-label');
-      const hover = a.querySelector('.pill-label-hover');
-      const { width: w, height: h } = a.getBoundingClientRect();
-      if (!w || !h) return;
-      const R = ((w * w) / 4 + h * h) / (2 * h);
-      const D = Math.ceil(2 * R) + 2;
-      const delta = Math.ceil(R - Math.sqrt(Math.max(0, R * R - (w * w) / 4))) + 1;
-      circle.style.width = `${D}px`;
-      circle.style.height = `${D}px`;
-      circle.style.bottom = `-${delta}px`;
-      gsap.set(circle, { xPercent: -50, scale: 0, transformOrigin: `50% ${D - delta}px` });
-      gsap.set(label, { y: 0 });
-      gsap.set(hover, { y: Math.ceil(h + 100), opacity: 0 });
-      const tl = gsap.timeline({ paused: true });
-      tl.to(circle, { scale: 1.2, xPercent: -50, duration: 2, ease, overwrite: 'auto' }, 0);
-      tl.to(label, { y: -(h + 8), duration: 2, ease, overwrite: 'auto' }, 0);
-      tl.to(hover, { y: 0, opacity: 1, duration: 2, ease, overwrite: 'auto' }, 0);
-      tls[i] = tl;
-    });
-  };
-
-  const go = (i, to, duration) => {
-    const tl = tls[i];
-    if (!tl) return;
-    if (tweens[i]) tweens[i].kill();
-    tweens[i] = tl.tweenTo(to ? tl.duration() : 0, { duration, ease, overwrite: 'auto' });
-  };
-  links.forEach((a, i) => {
-    a.addEventListener('mouseenter', () => go(i, true, 0.3));
-    a.addEventListener('mouseleave', () => go(i, false, 0.2));
-    a.addEventListener('focus', () => go(i, true, 0.3));
-    a.addEventListener('blur', () => go(i, false, 0.2));
-  });
-
-  // Logo spin on hover
-  const logoImg = document.querySelector('.site-header .logo img');
-  let logoTween;
-  if (logoImg) {
-    logoImg.parentElement.addEventListener('mouseenter', () => {
-      if (logoTween) logoTween.kill();
-      gsap.set(logoImg, { rotate: 0 });
-      logoTween = gsap.to(logoImg, { rotate: 360, duration: 0.2, ease, overwrite: 'auto' });
-    });
-  }
-
-  // Initial load animation (desktop only)
-  if (desktop.matches && !reduce) {
-    const logo = document.querySelector('.site-header .logo');
-    if (logo) gsap.from(logo, { scale: 0, duration: 0.6, ease });
-    gsap.from(list, { width: 0, duration: 0.6, ease, onStart: () => { list.style.overflow = 'hidden'; }, onComplete: () => { list.style.overflow = ''; gsap.set(list, { clearProps: 'width' }); layout(); } });
-  }
-
-  layout();
-  let t;
-  window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(layout, 100); });
-  desktop.addEventListener('change', layout);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout).catch(() => {});
+  if (!seg) return;
+  // Scroll-spy moves the thumb too (ignored while a click/drag scroll is in flight).
+  new MutationObserver(() => { if (!locked) seg.setActive(activeIndex()); })
+    .observe(navLinks, { subtree: true, attributes: true, attributeFilter: ['class'] });
 })();
 
 // Hamburger menu (≤900px) — OptionWheel overlay
