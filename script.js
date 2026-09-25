@@ -233,6 +233,46 @@ document.querySelectorAll('main section[id]').forEach(s => navObserver.observe(s
   if (dock) grid.classList.add('is-docked');
 })();
 
+// More projects — BorderGlow on card hover (React Bits, vanilla port)
+(() => {
+  const grid = document.querySelector('#more-work .project-grid');
+  if (!grid || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  const colors = ['#e85002', '#f26a1b', '#d9c3ab'];
+  const glow = { h: 22, s: 100, l: 70 }; // warm orange, as "H S L"
+  const intensity = 1;
+  const vars = {};
+  [100, 60, 50, 40, 30, 20, 10].forEach((o, i) => {
+    const key = ['', '-60', '-50', '-40', '-30', '-20', '-10'][i];
+    vars[`--glow-color${key}`] = `hsl(${glow.h}deg ${glow.s}% ${glow.l}% / ${Math.min(o * intensity, 100)}%)`;
+  });
+  const POS = ['80% 55%', '69% 34%', '8% 6%', '41% 38%', '86% 85%', '82% 18%', '51% 4%'];
+  const KEYS = ['one', 'two', 'three', 'four', 'five', 'six', 'seven'];
+  const MAP = [0, 1, 2, 0, 1, 2, 1];
+  KEYS.forEach((k, i) => { vars[`--gradient-${k}`] = `radial-gradient(at ${POS[i]}, ${colors[MAP[i]]} 0px, transparent 50%)`; });
+  vars['--gradient-base'] = `linear-gradient(${colors[0]} 0 100%)`;
+  Object.entries(vars).forEach(([k, v]) => grid.style.setProperty(k, v));
+
+  grid.querySelectorAll('.project-card').forEach(card => {
+    const light = document.createElement('span');
+    light.className = 'edge-light';
+    light.setAttribute('aria-hidden', 'true');
+    card.prepend(light);
+    card.classList.add('border-glow-card');
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      const cx = r.width / 2, cy = r.height / 2;
+      const dx = e.clientX - r.left - cx, dy = e.clientY - r.top - cy;
+      const kx = dx !== 0 ? cx / Math.abs(dx) : Infinity;
+      const ky = dy !== 0 ? cy / Math.abs(dy) : Infinity;
+      const edge = Math.min(Math.max(1 / Math.min(kx, ky), 0), 1);
+      let deg = dx === 0 && dy === 0 ? 0 : Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+      if (deg < 0) deg += 360;
+      card.style.setProperty('--edge-proximity', (edge * 100).toFixed(3));
+      card.style.setProperty('--cursor-angle', `${deg.toFixed(3)}deg`);
+    });
+  });
+})();
+
 // Hero title — TechText canvas effect
 (() => {
   const title = document.getElementById('heroTitle');
