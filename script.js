@@ -387,3 +387,20 @@ document.getElementById('year').textContent = new Date().getFullYear();
     pauseBetweenAnimations: 1
   });
 })();
+
+// GradualBlur — fixed soft blur along the bottom of the viewport
+(() => {
+  if (!window.GradualBlur) return;
+  window.GradualBlur(document.body, {
+    target: 'page',
+    position: 'bottom',
+    height: '6rem',
+    strength: 2,
+    divCount: 5,
+    curve: 'bezier',
+    exponential: true,
+    opacity: 1,
+    zIndex: -10,       // page target adds +100 → 90: under the sticky header (100) and mobile menu (99)
+    hideAtEnd: true    // fade out at the very bottom so the footer isn't left blurred
+  });
+})();
