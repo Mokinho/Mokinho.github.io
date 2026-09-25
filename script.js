@@ -274,21 +274,24 @@ document.querySelectorAll('main section[id]').forEach(s => navObserver.observe(s
   const band = document.getElementById('loopBand');
   if (!band || !window.TextLoop) return;
   const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#e85002';
+  const small = window.matchMedia('(max-width: 640px)').matches;
   window.TextLoop(band, {
     text: 'FAIQ & WEB DEV',
     shape: 'wave',
-    speed: 90,
+    fitWidth: true,           // full-width band, sizes below are real pixels
+    period: small ? 220 : 340,
+    speed: 60,
     direction: 'forward',
     separator: '✦',
-    curviness: 60,
-    fontSize: 46,
+    curviness: small ? 10 : 14,
+    fontSize: small ? 15 : 20,
     fontWeight: 700,
     letterSpacing: 2,
     uppercase: true,
     color: '#120b07',
     ribbon: true,
     ribbonColor: accent,
-    ribbonWidth: 86,
+    ribbonWidth: small ? 30 : 40,
     pauseOnHover: true
   });
 })();

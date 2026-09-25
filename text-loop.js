@@ -14,7 +14,7 @@
   const NS = 'http://www.w3.org/2000/svg';
   let uid = 0;
 
-  const buildPath = (shape, curviness, ribbonWidth) => {
+  const buildPath = (shape, curviness, ribbonWidth, width = 0, period = 320) => {
     const c = Math.max(0, curviness);
     const room = Math.max(20, CY - Math.max(0, ribbonWidth) / 2 - EDGE_PAD);
     switch (shape) {
@@ -43,6 +43,12 @@
       case 'wave':
       default: {
         const a = Math.min(c * 2.2, room * 2);
+        if (width) {
+          // pixel-true wave across the real width (fitWidth mode)
+          let d = `M ${-period} ${CY} Q ${-period / 2} ${CY - a} 0 ${CY}`;
+          for (let x = period; x < width + period * 2; x += period) d += ` T ${x} ${CY}`;
+          return d;
+        }
         return `M -320 ${CY} Q -160 ${CY - a} 0 ${CY} T 320 ${CY} T 640 ${CY} T 960 ${CY} T 1280 ${CY} T ${VIEW_W + 320} ${CY}`;
       }
     }
@@ -52,11 +58,13 @@
     const o = Object.assign({
       text: 'React ✦ Bits', shape: 'wave', path: null, speed: 90, direction: 'forward', separator: '✦',
       curviness: 90, fontSize: 46, fontWeight: 800, letterSpacing: 2, uppercase: true, color: '#ffffff',
-      ribbon: true, ribbonColor: '#5227FF', ribbonWidth: 86, pauseOnHover: true, fontFamily: ''
+      ribbon: true, ribbonColor: '#5227FF', ribbonWidth: 86, pauseOnHover: true, fontFamily: '',
+      fitWidth: false, period: 320
     }, options);
 
     const id = `text-loop-${++uid}`;
-    const d = o.path || buildPath(o.shape, o.curviness, o.ribbonWidth);
+    const pathFor = () => o.path || buildPath(o.shape, o.curviness, o.ribbonWidth, o.fitWidth ? Math.max(1, root.clientWidth) : 0, o.period);
+    const d = pathFor();
     const base = o.uppercase ? String(o.text).toUpperCase() : String(o.text);
     const unit = `${base}${o.separator ? ` ${o.separator} ` : '   '}`;
 
@@ -112,13 +120,18 @@
     root.appendChild(svg);
 
     // Crop the viewBox to the ribbon's real extent (plus a little padding).
-    try {
-      const bb = pathEl.getBBox();
-      const pad = (o.ribbon ? o.ribbonWidth / 2 : o.fontSize) + 8;
-      const y = Math.max(0, bb.y - pad);
-      const h = Math.min(VIEW_H, bb.y + bb.height + pad) - y;
-      if (h > 0) svg.setAttribute('viewBox', `0 ${y} ${VIEW_W} ${h}`);
-    } catch (err) { /* keep the full viewBox */ }
+    // In fitWidth mode the viewBox is the element's pixel width, so fontSize etc. are real pixels.
+    const crop = () => {
+      try {
+        const bb = pathEl.getBBox();
+        const pad = (o.ribbon ? o.ribbonWidth / 2 : o.fontSize) + 8;
+        const y = Math.max(0, bb.y - pad);
+        const h = Math.min(VIEW_H, bb.y + bb.height + pad) - y;
+        const w = o.fitWidth ? Math.max(1, root.clientWidth) : VIEW_W;
+        if (h > 0) svg.setAttribute('viewBox', `0 ${y} ${w} ${h}`);
+      } catch (err) { /* keep the full viewBox */ }
+    };
+    crop();
 
     let length = 0;
     let offset = 0;
@@ -171,6 +184,17 @@
     const start = () => { last = performance.now(); loop(); };
 
     measure();
+    if (o.fitWidth) {
+      let lastW = root.clientWidth;
+      new ResizeObserver(() => {
+        const w = root.clientWidth;
+        if (Math.abs(w - lastW) < 1) return;
+        lastW = w;
+        pathEl.setAttribute('d', pathFor());
+        crop();
+        measure();
+      }).observe(root);
+    }
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure).catch(() => {});
 
     if (o.pauseOnHover) {
