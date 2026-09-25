@@ -527,6 +527,11 @@ main { display: flex; flex-direction: column; gap: var(--gap); }
   opacity: 0; transform: translate(-50%, 0); transition: opacity .2s ease, transform .2s ease;
 }
 .dock-item.is-hovered .dock-label { opacity: 1; transform: translate(-50%, -10px); }
+/* Edge items: anchor the tooltip to the item's edge so long labels (the email) aren't clipped */
+.dock-item:first-child .dock-label { left: 0; transform: translate(0, 0); }
+.dock-item:first-child.is-hovered .dock-label { transform: translate(0, -10px); }
+.dock-item:last-child .dock-label { left: auto; right: 0; transform: translate(0, 0); }
+.dock-item:last-child.is-hovered .dock-label { transform: translate(0, -10px); }
 
 /* ---------- Footer ---------- */
 footer.shell { margin-top: var(--gap); padding-bottom: 24px; }
