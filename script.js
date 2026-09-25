@@ -269,6 +269,30 @@ document.querySelectorAll('main section[id]').forEach(s => navObserver.observe(s
   });
 })();
 
+// TextLoop band between FAQ and Contact
+(() => {
+  const band = document.getElementById('loopBand');
+  if (!band || !window.TextLoop) return;
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#e85002';
+  window.TextLoop(band, {
+    text: 'FAIQ & WEB DEV',
+    shape: 'wave',
+    speed: 90,
+    direction: 'forward',
+    separator: '✦',
+    curviness: 60,
+    fontSize: 46,
+    fontWeight: 700,
+    letterSpacing: 2,
+    uppercase: true,
+    color: '#120b07',
+    ribbon: true,
+    ribbonColor: accent,
+    ribbonWidth: 86,
+    pauseOnHover: true
+  });
+})();
+
 // Hero title — TechText canvas effect
 (() => {
   const title = document.getElementById('heroTitle');
