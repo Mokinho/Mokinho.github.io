@@ -36,6 +36,7 @@
   if (document.readyState === 'complete') loaded = true;
   else window.addEventListener('load', () => { loaded = true; }, { once: true });
   requestAnimationFrame(tick);
+  setTimeout(finish, MAX_MS + 500); // rAF can be paused (background tab); don't rely on it alone
 })();
 
 // Mobile nav toggle
