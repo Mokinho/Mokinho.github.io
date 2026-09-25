@@ -15,7 +15,7 @@ navToggle.addEventListener('click', () => {
 });
 navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeNav));
 document.addEventListener('click', e => {
-  if (!e.target.closest('.header-inner')) closeNav();
+  if (!e.target.closest('.header-inner, .nav-wheel')) closeNav();
 });
 
 // Header background once scrolled
@@ -179,6 +179,76 @@ document.querySelectorAll('main section[id]').forEach(s => navObserver.observe(s
   window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(layout, 100); });
   desktop.addEventListener('change', layout);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout).catch(() => {});
+})();
+
+// Hamburger menu (≤900px) — OptionWheel overlay
+(() => {
+  if (!window.OptionWheel) return;
+  const mobile = window.matchMedia('(max-width: 900px)');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const links = [...navLinks.querySelectorAll('a')];
+  const items = links.map(a => ({ label: a.textContent.trim(), href: a.getAttribute('href') }));
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#e85002';
+
+  const overlay = document.createElement('div');
+  overlay.className = 'nav-wheel';
+  overlay.id = 'navWheel';
+  overlay.setAttribute('aria-hidden', 'true');
+  overlay.innerHTML = '<div class="nav-wheel-track"></div><p class="nav-wheel-hint">Scroll or drag · tap to go</p>';
+  document.body.appendChild(overlay);
+
+  let leaving = false;
+  const go = (i, item) => {
+    if (leaving) return;
+    leaving = true;
+    setTimeout(() => {
+      closeNav();
+      const el = document.querySelector(item.href);
+      if (el) {
+        el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+        history.replaceState(null, '', item.href);
+      }
+      leaving = false;
+    }, reduce ? 0 : 320);
+  };
+
+  const wheel = window.OptionWheel(overlay.querySelector('.nav-wheel-track'), {
+    items,
+    defaultSelected: 0,
+    textColor: '#8f857d',
+    activeColor: accent,
+    side: 'left',
+    fontSize: 2.6,
+    spacing: 1.45,
+    curve: 1,
+    tilt: 8,
+    blur: 1.5,
+    fade: 0.22,
+    minOpacity: 0.08,
+    smoothing: reduce ? 1 : 200,
+    inset: 36,
+    ariaLabel: 'Site sections',
+    onSelect: go
+  });
+  navLinks.classList.add('has-wheel');
+
+  const sync = () => {
+    const open = navLinks.classList.contains('open') && mobile.matches;
+    if (open === overlay.classList.contains('open')) return;
+    overlay.classList.toggle('open', open);
+    overlay.setAttribute('aria-hidden', String(!open));
+    document.documentElement.classList.toggle('nav-wheel-lock', open);
+    if (open) {
+      const active = Math.max(0, links.findIndex(a => a.classList.contains('active')));
+      wheel.select(active, true);
+      setTimeout(() => wheel.focus(), 50);
+    }
+  };
+  new MutationObserver(sync).observe(navLinks, { attributes: true, attributeFilter: ['class'] });
+  mobile.addEventListener('change', () => { if (!mobile.matches) closeNav(); sync(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) { closeNav(); navToggle.focus(); }
+  });
 })();
 
 // Hero title — TechText canvas effect

@@ -526,6 +526,40 @@ footer li a:hover { color: var(--sub); }
   .glow, .hero-avatar img, .hero-avatar::before, body::before, body::after { animation: none; }
 }
 
+/* ---------- Hamburger menu: OptionWheel overlay (≤900px) ---------- */
+.nav-wheel {
+  position: fixed; inset: 0; z-index: 99;
+  background: radial-gradient(120% 70% at 0% 50%, rgba(232,80,2,.18), transparent 60%), rgba(8,5,3,.94);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  opacity: 0; visibility: hidden; transition: opacity .3s var(--ease), visibility 0s linear .3s;
+}
+.nav-wheel.open { opacity: 1; visibility: visible; transition: opacity .3s var(--ease), visibility 0s; }
+.nav-wheel-track { position: absolute; top: 84px; bottom: 56px; left: 0; right: 0; }
+.nav-wheel-hint {
+  position: absolute; left: 0; right: 0; bottom: 22px; text-align: center;
+  font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+}
+html.nav-wheel-lock, html.nav-wheel-lock body { overflow: hidden; }
+
+.option-wheel {
+  --ow-text-color: #a6a6a6; --ow-active-color: #ffffff; --ow-font-size: 3rem; --ow-inset: 80px;
+  position: relative; width: 100%; height: 100%; overflow: hidden;
+  cursor: grab; user-select: none; -webkit-user-select: none; touch-action: none; outline: none;
+}
+.option-wheel:focus-visible { box-shadow: inset 0 0 0 2px rgba(232,80,2,.5); }
+.option-wheel--dragging { cursor: grabbing; }
+.option-wheel__item {
+  position: absolute; top: 50%; left: var(--ow-inset);
+  white-space: nowrap; font-family: var(--font-display); font-size: var(--ow-font-size);
+  line-height: 1; font-weight: 500; letter-spacing: -.02em;
+  transform-origin: left center; cursor: pointer; -webkit-user-drag: none;
+  will-change: transform, opacity, filter;
+  color: color-mix(in srgb, var(--ow-active-color) calc(var(--ow-p, 0) * 100%), var(--ow-text-color));
+}
+.option-wheel--right .option-wheel__item { left: auto; right: var(--ow-inset); transform-origin: right center; }
+.option-wheel__item--selected { font-weight: 700; }
+@media (min-width: 901px) { .nav-wheel { display: none; } }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1100px) {
   .project-grid { grid-template-columns: repeat(3, 1fr); }
@@ -550,6 +584,7 @@ footer li a:hover { color: var(--sub); }
   .nav-links a { padding: 13px 16px; font-size: 15px; }
   .header-inner { position: relative; }
   .nav-links .hover-circle, .nav-links .pill-label-hover, .nav-links a.active::after { display: none; }
+  .nav-links.has-wheel { display: none; }
 
   .hero { flex-direction: column-reverse; align-items: flex-start; padding: 40px 32px; min-height: 0; }
   .hero-avatar { width: 150px; }
