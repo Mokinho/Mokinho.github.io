@@ -187,7 +187,7 @@ document.querySelectorAll('main section[id]').forEach(s => navObserver.observe(s
   const mobile = window.matchMedia('(max-width: 900px)');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const links = [...navLinks.querySelectorAll('a')];
-  const items = links.map(a => ({ label: a.textContent.trim(), href: a.getAttribute('href') }));
+  const items = links.map(a => ({ label: (a.querySelector('.pill-label') || a).textContent.trim(), href: a.getAttribute('href') }));
   const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#e85002';
 
   const overlay = document.createElement('div');
