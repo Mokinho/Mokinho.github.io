@@ -91,5 +91,34 @@ document.querySelectorAll('main section[id]').forEach(s => navObserver.observe(s
   window.addEventListener('resize', resize);
 })();
 
+// Hero title — TechText canvas effect
+(() => {
+  const title = document.getElementById('heroTitle');
+  const fx = title && title.querySelector('.hero-title-fx');
+  if (!fx || !window.TechText) return;
+  const css = getComputedStyle(document.documentElement);
+  const accent = css.getPropertyValue('--accent').trim() || '#e85002';
+  const tt = window.TechText(fx, {
+    segments: [
+      { text: 'I build websites that are fast, ' },
+      { text: 'secure', color: accent },
+      { text: ' & built to grow.' }
+    ],
+    sizeFrom: title,
+    fontWeight: 700,
+    lineHeight: 1.08,
+    letterSpacing: -0.02,
+    pad: 32,
+    color: '#ffffff',
+    accentColor: accent,
+    reveal: 'letter',
+    dashLength: 4,
+    dashGap: 2,
+    strokeWidth: 1.2,
+    specks: 15
+  });
+  if (tt) title.classList.add('tech-ready');
+})();
+
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
