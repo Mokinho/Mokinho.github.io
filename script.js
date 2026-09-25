@@ -372,3 +372,18 @@ document.querySelectorAll('canvas.particles').forEach(canvas => {
 
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// TrueFocus on the "Hello, World!" words in the About heading
+(() => {
+  const el = document.getElementById('helloFocus');
+  if (!el || !window.TrueFocus) return;
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#e85002';
+  window.TrueFocus(el, {
+    sentence: '“Hello, World!”',
+    blurAmount: 4,
+    borderColor: accent,
+    glowColor: 'rgba(232, 80, 2, .6)',
+    animationDuration: 0.6,
+    pauseBetweenAnimations: 1
+  });
+})();

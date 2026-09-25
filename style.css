@@ -852,3 +852,25 @@ html.preloading .hero .reveal { opacity: 0; transform: translateY(18px); }
   .feature-wide-media { aspect-ratio: 4 / 3; }
   .feature-wide-body { padding: 24px 22px 26px; }
 }
+
+/* ---------- TrueFocus (About heading "Hello, World!") ---------- */
+.focus-container { position: relative; display: inline-block; white-space: nowrap; user-select: none; }
+.focus-word { position: relative; display: inline-block; transition: filter var(--tf-dur, .5s) ease; }
+.focus-word.manual { cursor: pointer; }
+.focus-frame {
+  position: absolute; top: 0; left: 0; width: 0; height: 0; opacity: 0;
+  pointer-events: none; box-sizing: content-box;
+  transition: transform var(--tf-dur, .5s) var(--ease), width var(--tf-dur, .5s) var(--ease),
+              height var(--tf-dur, .5s) var(--ease), opacity .3s ease;
+}
+.focus-frame .corner {
+  position: absolute; width: .32em; height: .32em;
+  border: 3px solid var(--border-color, #fff); border-radius: 3px;
+  filter: drop-shadow(0 0 4px var(--glow-color, var(--border-color, #fff)));
+}
+.focus-frame .top-left     { top: -.18em; left: -.22em; border-right: none; border-bottom: none; }
+.focus-frame .top-right    { top: -.18em; right: -.22em; border-left: none; border-bottom: none; }
+.focus-frame .bottom-left  { bottom: -.18em; left: -.22em; border-right: none; border-top: none; }
+.focus-frame .bottom-right { bottom: -.18em; right: -.22em; border-left: none; border-top: none; }
+.focus-container.is-static .focus-frame { display: none; }
+@media (max-width: 640px) { .focus-frame .corner { border-width: 2px; } }
