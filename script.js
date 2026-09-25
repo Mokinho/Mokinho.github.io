@@ -251,6 +251,35 @@ document.querySelectorAll('main section[id]').forEach(s => navObserver.observe(s
   });
 })();
 
+// Contact card — Dock (magnifying icon dock), built from the contact links
+(() => {
+  const grid = document.querySelector('.contact-links');
+  if (!grid || !window.Dock) return;
+  const svg = d => `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const ICONS = {
+    email: svg('<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/>'),
+    whatsapp: svg('<path d="M20.5 11.6a8.5 8.5 0 0 1-12.4 7.5L3.5 20.5l1.4-4.4a8.5 8.5 0 1 1 15.6-4.5z"/><path d="M9 9.2c.2 2.6 2.2 4.6 4.8 4.9l1-1.1 1.8.8-.4 1.6c-3.9.2-7.6-3.4-7.4-7.3l1.6-.4.8 1.8z"/>'),
+    linkedin: svg('<rect x="3" y="3" width="18" height="18" rx="3.5"/><path d="M8 10.5V17M8 7.25v.01M12 17v-6.5M12 13.5a2.5 2.5 0 0 1 5 0V17"/>'),
+    resume: svg('<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>')
+  };
+  const items = [...grid.querySelectorAll('a.contact-link')].map(a => {
+    const label = a.querySelector('.contact-label').textContent.trim();
+    const value = a.querySelector('.contact-value').textContent.trim();
+    return {
+      href: a.getAttribute('href'),
+      target: a.getAttribute('target'),
+      rel: a.getAttribute('rel'),
+      label: label === 'Email' ? value : label,
+      icon: ICONS[label.toLowerCase()] || ICONS.resume
+    };
+  });
+  const mount = document.createElement('div');
+  mount.className = 'contact-dock';
+  grid.after(mount);
+  const dock = window.Dock(mount, { items, panelHeight: 68, baseItemSize: 50, magnification: 70, distance: 200 });
+  if (dock) grid.classList.add('is-docked');
+})();
+
 // Hero title — TechText canvas effect
 (() => {
   const title = document.getElementById('heroTitle');
