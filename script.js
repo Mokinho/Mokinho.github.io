@@ -48,14 +48,13 @@ const navObserver = new IntersectionObserver(entries => {
 }, { rootMargin: '-40% 0px -55% 0px' });
 document.querySelectorAll('main section[id]').forEach(s => navObserver.observe(s));
 
-// Hero particles
-(() => {
-  const canvas = document.getElementById('particles');
-  if (!canvas) return;
+// Particles (hero + contact backgrounds); each canvas only animates while on screen
+document.querySelectorAll('canvas.particles').forEach(canvas => {
   const ctx = canvas.getContext('2d');
+  if (!ctx) return;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const colors = ['232,80,2', '241,96,1', '217,195,171', '255,255,255'];
-  let w, h, dpr, dots = [];
+  let w, h, dpr, dots = [], raf = 0, visible = true;
 
   const resize = () => {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -70,9 +69,11 @@ document.querySelectorAll('main section[id]').forEach(s => navObserver.observe(s
       a: Math.random() * .6 + .2,
       c: colors[Math.floor(Math.random() * colors.length)]
     }));
+    if (reduce || !raf) draw(true);
   };
 
-  const draw = () => {
+  function draw(once) {
+    raf = 0;
     ctx.clearRect(0, 0, w, h);
     for (const d of dots) {
       d.x += d.vx; d.y += d.vy;
@@ -83,13 +84,16 @@ document.querySelectorAll('main section[id]').forEach(s => navObserver.observe(s
       ctx.fillStyle = `rgba(${d.c},${d.a})`;
       ctx.fill();
     }
-    if (!reduce) requestAnimationFrame(draw);
-  };
+    if (!reduce && visible && once !== true) raf = requestAnimationFrame(draw);
+  }
 
+  new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    if (visible && !reduce && !raf) raf = requestAnimationFrame(draw);
+  }).observe(canvas);
   resize();
-  draw();
   window.addEventListener('resize', resize);
-})();
+});
 
 // Desktop menu — RubberSegment thumb (stretch + squash), synced with scroll-spy
 (() => {

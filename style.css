@@ -481,7 +481,7 @@ main { display: flex; flex-direction: column; gap: var(--gap); }
   position: relative; overflow: hidden; isolation: isolate;
   background: var(--ink); border: 1px solid var(--line); border-radius: var(--radius); padding: 56px; color: #fff;
 }
-.contact .hero-media::after { background: linear-gradient(102deg, rgba(18,11,7,.95) 0%, rgba(18,11,7,.8) 55%, rgba(18,11,7,.35) 100%); }
+/* contact uses the same background as the hero (glows + particles + overlay) */
 .contact h2 { color: #fff; max-width: 640px; }
 .contact-body > p:not(.pill) { color: rgba(255,255,255,.75); margin-top: 14px; max-width: 560px; }
 .contact-links { display: grid; grid-template-columns: 1.5fr 1fr 1.3fr .9fr; gap: 12px; margin-top: 36px; }
