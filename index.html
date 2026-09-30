@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="assets/avatar-circle.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,700;125,800;125,900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script>document.documentElement.classList.add('preloading');</script>
 </head>
@@ -56,16 +56,44 @@
   <!-- HERO -->
   <section class="hero" id="top">
     <div class="hero-media" aria-hidden="true">
+      <span class="hero-grid"></span>
       <span class="glow g1"></span>
       <span class="glow g2"></span>
       <canvas class="particles" id="particles"></canvas>
     </div>
-    <div class="hero-body">
+
+    <div class="hero-stage">
       <p class="pill pill-accent reveal">Senior WordPress / PHP Developer · 6+ Years</p>
       <h1 class="reveal hero-title" id="heroTitle">
         <span class="hero-title-text">I build websites that are fast, <span class="hl">secure</span> &amp; built to grow.</span>
         <span class="hero-title-fx" aria-hidden="true"></span>
       </h1>
+
+      <!-- decorative: squiggle arrows -->
+      <svg class="squiggle sq-1" viewBox="0 0 160 150" aria-hidden="true"><path d="M20 30 C 70 -10, 150 20, 130 70 C 115 110, 60 110, 70 80 C 78 58, 118 70, 110 128"/><path d="M92 112 L110 130 L126 108"/></svg>
+      <svg class="squiggle sq-2" viewBox="0 0 170 130" aria-hidden="true"><path d="M30 20 C 60 10, 70 40, 40 55 C 10 70, 30 100, 70 90 C 100 82, 120 90, 150 110"/><path d="M128 112 L152 112 L146 88"/></svg>
+
+      <!-- decorative: glass profile cards -->
+      <div class="glass-card gc-1" aria-hidden="true">
+        <img src="assets/avatar-circle.png" alt="" width="72" height="72">
+        <strong>faiq.dev</strong>
+        <span>6+ years in WordPress</span>
+      </div>
+      <div class="glass-card gc-2" aria-hidden="true">
+        <img src="assets/logo-mark-192.png" alt="" width="72" height="72">
+        <strong>40+ sites</strong>
+        <span>built &amp; maintained</span>
+      </div>
+
+      <!-- rotating badge -->
+      <a href="#contact" class="spin-badge" aria-label="Let's talk — go to contact">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <defs><path id="badgeCircle" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs>
+          <text><textPath href="#badgeCircle">LET'S TALK · LET'S TALK · LET'S TALK ·</textPath></text>
+        </svg>
+        <svg class="badge-mark" viewBox="0 0 60 60" aria-hidden="true"><path d="M14 40 C 18 18, 34 14, 30 30 C 26 44, 40 46, 46 22"/><path d="M38 26 L46 20 L50 30"/></svg>
+      </a>
+
       <p class="hero-sub reveal">
         Based in Kuala Lumpur, currently Senior Web Developer at Sterrific —
         building and operating 40+ production websites. From custom WordPress
@@ -77,8 +105,33 @@
         <a href="assets/Muhammad_Faiq_Zharfan_Johari_CV_2026.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Resume ↗</a>
       </div>
     </div>
-    <div class="hero-avatar reveal" aria-hidden="true">
-      <img src="assets/avatar-circle.png" alt="" width="360" height="360">
+
+    <!-- bottom tray: three steps -->
+    <div class="hero-tray">
+      <article class="tray-card reveal">
+        <h3>Build it<br>right</h3>
+        <p>Custom WordPress &amp; WooCommerce</p>
+        <div class="tray-widget">
+          <span class="tw-chip"><img src="assets/avatar-circle.png" alt="" width="28" height="28"> PHP · ACF · CPT</span>
+          <span class="tw-pill">40+ sites</span>
+        </div>
+      </article>
+      <svg class="tray-arrow" viewBox="0 0 60 40" aria-hidden="true"><path d="M4 30 C 14 4, 26 4, 24 20 C 22 34, 40 34, 54 12"/><path d="M44 12 L54 10 L54 22"/></svg>
+      <article class="tray-card reveal">
+        <h3>Launch it<br>safely</h3>
+        <p>Hosting, DNS/SSL &amp; zero-drama deploys</p>
+        <div class="tray-widget">
+          <span class="tw-field"><em>Performance</em><b>+35%</b></span>
+        </div>
+      </article>
+      <svg class="tray-arrow" viewBox="0 0 60 40" aria-hidden="true"><path d="M4 30 C 14 4, 26 4, 24 20 C 22 34, 40 34, 54 12"/><path d="M44 12 L54 10 L54 22"/></svg>
+      <article class="tray-card reveal">
+        <h3>Grow it<br>further</h3>
+        <p>Performance &amp; technical SEO</p>
+        <div class="tray-widget">
+          <span class="tw-bubble"><em>Conversion lift</em><b>+25%</b></span>
+        </div>
+      </article>
     </div>
   </section>
 

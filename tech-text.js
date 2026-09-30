@@ -4,7 +4,7 @@
  *   - segments: [{ text, color? }] so single words can use an accent colour
  *   - wraps to the container width and sizes its own height
  *   - font size is read from a CSS element (keeps the clamp()/media-query sizing)
- *   - left-aligned, with padding so the selection frame / labels / specks aren't clipped
+ *   - left- or centre-aligned (align option), with padding so the selection frame / labels / specks aren't clipped
  * Usage: const tt = TechText(containerEl, { segments, sizeFrom: h1El, ... }); tt.destroy();
  */
 (function () {
@@ -46,6 +46,7 @@
     lineHeight: 1.1,
     letterSpacing: -0.05,
     pad: 32,
+    align: 'left',
     color: '#ffffff',
     accentColor: '#ffffff',
     reach: 200,
@@ -203,7 +204,8 @@
       const bounds = { left: Infinity, right: -Infinity, top: Infinity, bottom: -Infinity };
       lines.forEach((lineChars, li) => {
         const baseline = s.pad + li * lh + (lh - (asc + desc)) / 2 + asc;
-        const x = s.pad;
+        const lineW = probe.measureText(lineChars.map(c => c.char).join('')).width;
+        const x = s.align === 'center' ? Math.max(s.pad, (width - lineW) / 2) : s.pad;
         let prefix = '';
         lineChars.forEach(({ char, color }) => {
           prefix += char;

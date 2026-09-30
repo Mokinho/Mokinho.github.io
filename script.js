@@ -350,14 +350,16 @@ document.querySelectorAll('canvas.particles').forEach(canvas => {
   const accent = css.getPropertyValue('--accent').trim() || '#e85002';
   const tt = window.TechText(fx, {
     segments: [
-      { text: 'I build websites that are fast, ' },
-      { text: 'secure', color: accent },
-      { text: ' & built to grow.' }
+      { text: '#', color: accent },
+      { text: 'FAST\n' },
+      { text: 'SECURE', color: accent },
+      { text: ' &\nBUILT TO GROW' }
     ],
     sizeFrom: title,
-    fontWeight: 700,
-    lineHeight: 1.08,
-    letterSpacing: -0.02,
+    fontWeight: 900,
+    lineHeight: 0.98,
+    letterSpacing: -0.03,
+    align: 'center',
     pad: 32,
     color: '#ffffff',
     accentColor: accent,
