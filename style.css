@@ -221,9 +221,15 @@ html.preloading .squiggle path { animation-play-state: paused; }
   box-shadow: 0 30px 60px -24px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.3);
   animation: float 6s ease-in-out infinite;
 }
-.glass-card img { width: 46%; aspect-ratio: 1; border-radius: 50%; border: 3px solid #fff; background: var(--ink); object-fit: cover; margin-bottom: 8px; }
+.glass-card img, .gc-icon {
+  width: 46%; height: auto; aspect-ratio: 1 / 1; flex: 0 0 auto;
+  border-radius: 50%; border: 3px solid #fff; background: var(--ink); object-fit: cover; margin-bottom: 8px;
+}
+.gc-icon { display: grid; place-items: center; background: var(--accent); }
+.gc-icon svg { width: 56%; height: 56%; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.gc-icon circle { fill: #fff; stroke: none; }
 .glass-card strong { font-family: var(--font-display); font-stretch: 125%; font-weight: 800; font-size: 14px; color: #fff; }
-.glass-card span { font-size: 11.5px; color: rgba(255,255,255,.7); }
+.glass-card > span:not(.gc-icon) { font-size: 11.5px; color: rgba(255,255,255,.7); }
 .gc-1 { left: 19%; top: 38%; transform: rotate(-8deg); }
 .gc-2 { right: 17%; top: 16%; transform: rotate(7deg); animation-delay: -3s; }
 .gc-1, .gc-2 { --r: 0deg; }
@@ -856,10 +862,10 @@ html.preloading .hero .reveal { opacity: 0; transform: translateY(18px); }
   .hero { padding: 32px 18px 0; }
   .hero-tray { margin: 30px -18px 0; padding: 14px; }
   .hero h1 { font-size: clamp(30px, 11vw, 52px); }
-  .glass-card { width: 78px; padding: 8px; border-radius: 18px; gap: 0; }
-  .glass-card img { margin-bottom: 4px; border-width: 2px; }
+  .glass-card { width: 84px; aspect-ratio: auto; padding: 10px 8px; border-radius: 18px; gap: 0; }
+  .glass-card img, .gc-icon { width: 44px; margin-bottom: 5px; border-width: 2px; }
   .glass-card strong { font-size: 9.5px; }
-  .glass-card span { display: none; }
+  .glass-card > span:not(.gc-icon) { display: none; }
   .gc-1 { left: -10px; top: 200px; }
   .gc-2 { right: -10px; top: 70px; }
   .squiggle { display: none; }
