@@ -84,7 +84,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 800; font-stretc
   transition: transform .3s var(--ease);
 }
 .logo:hover { transform: rotate(-4deg); }
-.logo img { width: 52px; height: 52px; }
+.logo img { width: 64px; height: 64px; }
 
 .nav-links {
   display: flex; align-items: center; gap: 2px;
@@ -623,7 +623,7 @@ html.preloading .squiggle path { animation-play-state: paused; }
 footer.shell { margin-top: var(--gap); padding-bottom: 24px; }
 .footer-panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 48px 48px 28px; }
 .footer-cols { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
-.footer-brand img { width: 64px; height: 64px; }
+.footer-brand img { width: 88px; height: 88px; margin-left: -4px; }
 .footer-brand p { margin-top: 14px; color: var(--body); font-size: 14.5px; max-width: 340px; }
 footer h4 { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
 footer h4:not(:first-child) { margin-top: 20px; }
@@ -788,7 +788,7 @@ html.preloading { overflow: hidden; }
   display: inline-flex; align-items: center; justify-content: center; height: 64px; padding: 4px 22px;
   background: transparent; animation: preloader-bob 1.4s ease-in-out infinite;
 }
-.preloader-logo img { width: 64px; height: 64px; }
+.preloader-logo img { width: 88px; height: 88px; }
 .preloader-name { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: .32em; text-transform: uppercase; color: var(--heading); margin-top: 6px; }
 .preloader-bar { width: 180px; height: 3px; border-radius: 3px; background: rgba(255,255,255,.1); overflow: hidden; }
 .preloader-bar span { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--accent-deep), var(--accent), var(--sand)); transform-origin: left; transform: scaleX(0); }
