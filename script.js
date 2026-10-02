@@ -1,3 +1,12 @@
+// Intro: split the hero intro line into words so they can blur in one after another
+(() => {
+  const sub = document.querySelector('.hero-sub');
+  if (!sub || !document.documentElement.classList.contains('intro')) return;
+  const words = sub.textContent.trim().split(/\s+/);
+  sub.innerHTML = words.map((w, i) => `<span class="w" style="--i:${i}">${w.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</span>`).join(' ');
+  sub.classList.add('is-split');
+})();
+
 // Mobile nav toggle
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
