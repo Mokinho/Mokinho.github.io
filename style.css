@@ -777,36 +777,56 @@ html.nav-wheel-lock, html.nav-wheel-lock body { overflow: hidden; }
 /* ---------- Page loader ---------- */
 .preloader { display: none; }
 html.preloading .preloader, .preloader.is-done {
-  display: flex; position: fixed; inset: 0; z-index: 1000; align-items: center; justify-content: center;
-  background: radial-gradient(60% 50% at 50% 55%, rgba(232,80,2,.16), transparent 70%), var(--canvas);
-  /* safety net: never block the page for more than ~5s, even if a script fails */
-  animation: preloader-failsafe .5s ease 5s forwards;
+  --out: 0;
+  display: block; position: fixed; inset: 0; z-index: 1000; overflow: hidden;
+  background: radial-gradient(40% 40% at 50% 50%, rgba(232,80,2,.18), transparent 70%), #020202;
+  /* safety net: never block the page for more than ~9s, even if a script fails */
+  animation: preloader-failsafe .5s ease 9s forwards;
 }
 html.preloading { overflow: hidden; }
-.preloader-inner { display: flex; flex-direction: column; align-items: center; gap: 14px; transition: opacity .35s ease, transform .5s var(--ease); }
-.preloader-logo {
-  display: inline-flex; align-items: center; justify-content: center; height: 64px; padding: 4px 22px;
-  background: transparent; animation: preloader-bob 1.4s ease-in-out infinite;
+.preloader-gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.preloader-hud { position: absolute; inset: 0; pointer-events: none; opacity: calc(1 - var(--out) * 2); }
+.hud {
+  position: absolute; font-family: var(--font-display); font-weight: 700; font-size: 10.5px;
+  letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.78); white-space: nowrap;
+  animation: hud-in .6s ease both;
 }
-.preloader-logo img { width: 88px; height: 88px; }
-.preloader-name { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: .32em; text-transform: uppercase; color: var(--heading); margin-top: 6px; }
-.preloader-bar { width: 180px; height: 3px; border-radius: 3px; background: rgba(255,255,255,.1); overflow: hidden; }
-.preloader-bar span { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--accent-deep), var(--accent), var(--sand)); transform-origin: left; transform: scaleX(0); }
-.preloader-count { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: .1em; color: var(--muted); font-variant-numeric: tabular-nums; }
-.preloader-curtain { position: absolute; inset: 0; background: var(--accent); transform: translateY(100%); pointer-events: none; }
-/* exit: content fades, an orange curtain sweeps up, then the whole loader lifts away */
-.preloader.is-done .preloader-inner { opacity: 0; transform: translateY(-14px); }
-.preloader.is-done .preloader-curtain { animation: preloader-curtain .9s cubic-bezier(.76,0,.24,1) .15s forwards; }
-.preloader.is-done { animation: preloader-lift .75s cubic-bezier(.76,0,.24,1) .55s forwards !important; }
-@keyframes preloader-curtain { 0% { transform: translateY(100%); } 50% { transform: translateY(0); } 100% { transform: translateY(-100%); } }
-@keyframes preloader-lift { to { transform: translateY(-100%); visibility: hidden; } }
+.hud i { font-style: normal; color: var(--accent); letter-spacing: .1em; }
+.hud b { color: var(--accent); font-weight: 700; }
+.hud-tl { top: 22px; left: 24px; }
+.hud-tc { top: 22px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.5); }
+.hud-tr { top: 22px; right: 24px; }
+.hud-bl { bottom: 22px; left: 24px; }
+.hud-br { bottom: 22px; right: 24px; color: rgba(255,255,255,.5); }
+.preloader-core {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  opacity: calc(1 - var(--out) * 3);
+}
+.preloader-thumb {
+  width: 40px; height: 40px; object-fit: cover; border-radius: 4px; background: #111;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.18), 0 10px 30px -8px rgba(0,0,0,.8);
+}
+.preloader-thumb:not([src]) { visibility: hidden; }
+.preloader-count {
+  font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: .12em;
+  color: #fff; font-variant-numeric: tabular-nums; text-shadow: 0 1px 8px rgba(0,0,0,.6);
+}
+.preloader-count::after { content: "%"; opacity: .55; margin-left: 1px; }
+/* no WebGL: show the shot itself larger */
+.preloader:not(.has-gl) .preloader-thumb { width: min(56vw, 420px); height: auto; aspect-ratio: 16 / 10; border-radius: 10px; }
+.preloader.is-done { animation: preloader-failsafe .6s ease forwards !important; }
 @keyframes preloader-failsafe { to { opacity: 0; visibility: hidden; } }
-@keyframes preloader-bob { 50% { transform: translateY(-6px); } }
+@keyframes hud-in { from { opacity: 0; } }
+.hud-tc { animation-name: hud-in-c; }
+@keyframes hud-in-c { from { opacity: 0; } }
 /* hold the hero's entrance until the loader has gone, so it plays in view */
 html.preloading .hero .reveal { opacity: 0; transform: translateY(18px); }
+@media (max-width: 600px) {
+  .hud { font-size: 9px; letter-spacing: .16em; }
+  .hud-tc, .hud-br { display: none; }
+}
 @media (prefers-reduced-motion: reduce) {
-  .preloader-logo { animation: none; }
-  .preloader.is-done .preloader-curtain { animation: none; }
   .preloader.is-done { animation: preloader-failsafe .3s ease forwards !important; }
 }
 

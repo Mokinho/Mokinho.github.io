@@ -10,21 +10,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,700;125,800;125,900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 <script>document.documentElement.classList.add('preloading');</script>
 </head>
 <body>
 
-<!-- Page loader (shown on every load / refresh; hidden without JS) -->
+<!-- Page loader: liquid-glass lens over a reel of project shots (shown on every load; hidden without JS) -->
 <div class="preloader" id="preloader" aria-hidden="true">
-  <div class="preloader-inner">
-    <span class="preloader-logo"><img src="assets/logo-mark-192.png?v=5" alt="" width="56" height="56"></span>
-    <p class="preloader-name">Faiq Zharfan</p>
-    <div class="preloader-bar"><span id="preloaderFill"></span></div>
-    <p class="preloader-count"><span id="preloaderCount">0</span>%</p>
+  <div class="preloader-hud">
+    <span class="hud hud-tl">Web Developer <i>&bull;&bull;</i></span>
+    <span class="hud hud-tc">Faiq Zharfan</span>
+    <span class="hud hud-tr"><i>&bull;&bull;</i> Portfolio 2026</span>
+    <span class="hud hud-bl">WordPress <b>/</b> PHP</span>
+    <span class="hud hud-br">Kuala Lumpur</span>
   </div>
-  <span class="preloader-curtain"></span>
+  <div class="preloader-core">
+    <img class="preloader-thumb" id="preloaderThumb" alt="" width="40" height="40">
+    <span class="preloader-count" id="preloaderCount">0</span>
+  </div>
 </div>
+<script src="loader.js?v=1"></script>
 
 <a class="skip-link" href="#main">Skip to content</a>
 
